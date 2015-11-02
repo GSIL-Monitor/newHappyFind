@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="newHappyFind"
+  id="myeclipse.1442496230612"
+  context-root="/newHappyFind"
+  j2ee-spec="5.0"
+  archive="newHappyFind.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

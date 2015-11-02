@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="happyfind.mapper.SystemLogMapper">
+	
+	<resultMap id="SystemLogMapp" type="happyfind.entity.SystemLog">
+		<result property="logid" column="logid" />
+		<result property="dateTime" column="dateTime" />
+		<result property="logType" column="logType" />
+		<result property="logUser" column="logUser" />
+		<result property="logcotent" column="logcotent" />
+		<result property="logkey" column="logkey" />
+		
+	</resultMap>
+	
+	
+	<select id="getList" resultMap="SystemLogMapp"  parameterType="SystemLog">
+	      select * from system_log where 1=1
+	      <if test="logkey!=null and logkey !=''"> and logkey = #{logkey}	</if>
+	      <if test="logUser!=null and logUser !=''"> and logUser = #{logUser}	</if>
+	      <if test="dateTime!=null and dateTime!=''"> and source = #{source}	</if>
+	</select>
+
+	<insert id="addEntity" parameterType="SystemLog">
+		INSERT INTO system_log(dateTime,logType,logUser,logcotent,logkey)
+		VALUES (
+		#{dateTime},#{logType},#{logUser},#{logcotent},#{logkey}
+		)
+	</insert>
+	
+    
+    <select id="getEntityById" resultMap="SystemLogMapp"  parameterType="int">
+	      select * from system_log where 1=1
+	       <if test="logId!=null and logId !=''"> and logid = #{logId}	</if>
+	</select>
+     
+</mapper>

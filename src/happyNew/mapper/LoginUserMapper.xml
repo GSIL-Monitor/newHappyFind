@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="happyNew.mapper.LoginUserMapper">
+	
+	<resultMap id="LoginUserMap" type="happyNew.entity.LoginUser">
+		<result property="userId" column="userId" />
+		<result property="userName" column="userName" />
+		<result property="userPass" column="userPass" />
+		<result property="userFlag" column="userFlag" />
+		<result property="userType" column="userType" />
+		<result property="zcTime" column="zcTime" />
+		<result property="sysType" column="sysType" />
+		<result property="userPhone" column="userPhone" />
+		
+	</resultMap>
+	
+	
+	<select id="getList" resultMap="LoginUserMap"  parameterType="LoginUser">
+	      select * from logon_User where 1=1
+	</select>
+	
+	<select id="getPassByUserName"  resultMap="LoginUserMap" parameterType="String">
+	      select * from logon_User where 1=1
+	      <if test="userName!=null and userName !=''"> and userName = #{userName}</if>
+	</select>
+	
+	<update id="updatePass"  parameterType="LoginUser">
+		UPDATE logon_User SET userPass = #{userPass}
+		where userName=#{userName}
+	</update>   
+	
+
+	<insert id="addEntity" parameterType="LoginUser">
+		INSERT INTO logon_User(userName,userPass,userFlag,userType,zcTime,sysType,userPhone)
+		VALUES (
+		#{userName},#{userPass},#{userFlag},#{userType},#{zcTime},#{sysType},#{userPhone}
+		)
+	</insert>
+	
+    
+    <select id="getEntityById" resultMap="LoginUserMap"  parameterType="int">
+	      select * from logon_User where 1=1
+	       <if test="userId!=null and userId !=''"> and userId = #{userId}	</if>
+	</select>
+     
+</mapper>

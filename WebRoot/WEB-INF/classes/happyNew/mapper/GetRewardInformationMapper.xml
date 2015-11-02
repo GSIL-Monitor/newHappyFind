@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="happyNew.mapper.GetRewardInformationMapper">
+	
+	<resultMap id="GetRewardInformationMapper" type="happyNew.entity.GetRewardInformation">
+		<result property="id" column="id" />
+		<result property="xunrenzizengid" column="xunrenzizengid" />
+		<result property="name" column="name" />
+		<result property="idcard" column="idcard" />
+		<result property="shengao" column="shengao" />
+		<result property="tizhong" column="tizhong" />
+		<result property="tedian" column="tedian" />
+		<result property="contactnumber1" column="contactnumber1" />
+		<result property="contactnumber2" column="contactnumber2" />
+		<result property="contactnumber3" column="contactnumber3" />
+		<result property="description" column="description" />
+		<result property="pingzheng" column="pingzheng" />
+		<result property="qiwangshangjin" column="qiwangshangjin" />
+		<result property="jingbiaoyoushi" column="jingbiaoyoushi" />
+		<result property="moduser" column="moduser" />
+		<result property="modtime" column="modtime" />
+		<result property="updateTime" column="updateTime" />
+		<result property="deleteFlag" column="deleteFlag" />
+		<result property="proFlag" column="proFlag" />
+		<result property="moduserType" column="moduserType" />
+	</resultMap>
+	
+	
+	<select id="getList" resultMap="GetRewardInformationMapper"  parameterType="GetRewardInformation">
+	      select b.id as id,
+				b.jingbiaoyoushi as jingbiaoyoushi,
+				b.qiwangshangjin as qiwangshangjin,
+				a.name as name,
+				a.idcard as idcard,
+				b.shengao as shengao,
+				b.tizhong as tizhong,
+				b.tedian as tedian,
+				b.contactnumber1 as contactnumber1,
+				b.contactnumber2 as contactnumber2,
+				b.contactnumber3 as contactnumber3,
+				b.description as description,
+				b.pingzheng as pingzheng,
+				b.proFlag as proFlag,
+				b.moduser as moduser,
+				b.modtime as modtime,
+				b.qiwangshangjin as qiwangshangjin,
+				b.xunrenzizengid as xunrenzizengid
+		  from find_people as a join getreward_information as b
+		  on a.id=b.xunrenzizengid 
+		  join logon_user u
+	      on b.moduser = u.userName 
+		  where (b.deleteFlag =0 or b.deleteFlag is null)
+	      <if test="grf.name!=null and grf.name !=''"> and b.name = #{grf.name}	</if>
+	      <if test="grf.idcard!=null and grf.idcard !=''"> and b.idcard = #{grf.idcard}	</if>
+	      <if test="grf.xunrenzizengid!=null and grf.xunrenzizengid !=''"> and b.xunrenzizengid = #{grf.xunrenzizengid}	</if>
+	      <if test="grf.proFlag!=null and grf.proFlag !=''"> and b.proFlag = #{grf.proFlag}	</if>
+	      <if test="grf.moduser!=null and grf.moduser !=''"> and b.moduser = #{grf.moduser}	</if>
+	      limit #{pagestr},#{pageNum}
+	</select>
+
+	<select id="getAllInt"  resultType="int" parameterType="GetRewardInformation">
+	      select count(1) from getreward_information where deleteFlag is null
+	      <if test="grf.name!=null and grf.name !=''"> and name = #{grf.name}	</if>
+	      <if test="grf.idcard!=null and grf.idcard !=''"> and idcard = #{grf.idcard}	</if>
+	      <if test="grf.xunrenzizengid!=null and grf.xunrenzizengid !=''"> and xunrenzizengid = #{grf.xunrenzizengid}	</if>
+	      <if test="grf.proFlag!=null and grf.proFlag !=''"> and proFlag = #{grf.proFlag}	</if>
+	</select>
+
+	<insert id="addEntity" parameterType="GetRewardInformation">
+		INSERT INTO getreward_information(xunrenzizengid,name,idcard,shengao,tizhong,tedian,contactnumber1,contactnumber2,contactnumber3,
+										description,pingzheng,qiwangshangjin,jingbiaoyoushi,proFlag,moduser,modtime,updateTime,deleteFlag)
+		VALUES (#{xunrenzizengid},#{name},#{idcard},#{shengao},#{tizhong},#{tedian},#{contactnumber1},#{contactnumber2},#{contactnumber3},
+		#{description},#{pingzheng},#{qiwangshangjin},#{jingbiaoyoushi},#{proFlag},#{moduser},#{modtime},#{updateTime},#{deleteFlag})
+	</insert>
+	
+	<update id="updateEntity"  parameterType="GetRewardInformation">  
+       UPDATE getreward_information SET 
+        shengao=#{shengao},tizhong=#{tizhong},tedian=#{tedian},
+        contactnumber1=#{contactnumber1},contactnumber2=#{contactnumber2},contactnumber3=#{contactnumber3},
+        description=#{description},pingzheng=#{pingzheng},qiwangshangjin=#{qiwangshangjin},jingbiaoyoushi=#{jingbiaoyoushi},
+        proFlag=#{proFlag},updateTime=#{updateTime},deleteFlag=#{deleteFlag}
+        where id = #{id} 
+    </update> 
+    
+    <update id="varGetReward"  parameterType="GetRewardInformation">  
+       UPDATE getreward_information SET 
+        proFlag=#{proFlag}
+        where id = #{id} 
+    </update> 
+    
+    <update id="deleteEntity"  parameterType="GetRewardInformation">  
+        UPDATE getreward_information SET 
+        updateTime=#{updateTime},
+        deleteFlag=#{deleteFlag}
+        where id = #{id} 
+    </update> 
+    
+    <select id="getEntityById" resultMap="GetRewardInformationMapper"  parameterType="int">
+	          select 
+				b.id,
+				b.jingbiaoyoushi,
+				b.qiwangshangjin,
+				a.name,
+				a.idcard,
+				b.shengao,
+				b.tizhong,
+				b.tedian,
+				b.contactnumber1,
+				b.contactnumber2,
+				b.contactnumber3,
+				b.description,
+				b.pingzheng,
+				b.moduser as moduser,
+				b.modtime as modtime,
+				b.qiwangshangjin as qiwangshangjin,
+				b.xunrenzizengid as xunrenzizengid
+		  from find_people as a,getreward_information as b
+		  where a.id=b.xunrenzizengid and (b.deleteFlag =0 or b.deleteFlag is null)
+	      <if test="id!=0"> and b.id = #{id}	</if>
+	</select>
+	
+	 <select id="getEntity" resultMap="GetRewardInformationMapper"  parameterType="GetRewardInformation">
+	      select * from getreward_information 
+		  where (deleteFlag =0 or deleteFlag is null)
+	      <if test="id!=0"> and id = #{id}	</if>
+	      <if test="moduser !=null and moduser!='' "> and moduser = #{moduser}	</if>
+	      <if test="xunrenzizengid !=null and xunrenzizengid!=''"> and xunrenzizengid = #{xunrenzizengid}	</if>
+	</select>
+	
+	
+     
+</mapper>

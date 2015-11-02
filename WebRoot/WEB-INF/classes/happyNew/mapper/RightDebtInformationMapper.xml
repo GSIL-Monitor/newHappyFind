@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="happyNew.mapper.RightDebtInformationMapper">
+	
+	<resultMap id="RightDebtInformationMapper" type="happyNew.entity.RightDebtInformation">
+		<result property="id" column="id" />
+		<result property="bianhaoId" column="bianhaoId" />
+		<result property="type" column="type" />
+		<result property="rightname" column="rightname" />
+		<result property="rightaddress" column="rightaddress" />
+		<result property="rightphone" column="rightphone" />
+		<result property="rightidcard" column="rightidcard" />
+		<result property="rightcontact" column="rightcontact" />
+		<result property="rightcontactphone" column="rightcontactphone" />
+		<result property="rightamount" column="rightamount" />
+		<result property="disposalmethod" column="disposalmethod" />
+		<result property="latedays" column="latedays" />
+		<result property="guaranteemethod" column="guaranteemethod" />
+		<result property="collectionmeasures" column="collectionmeasures" />
+		<result property="voucher" column="voucher" />
+		<result property="rightdesc" column="rightdesc" />
+		<result property="debtname" column="debtname" />
+		<result property="debtaddress" column="debtaddress" />
+		<result property="debtphone1" column="debtphone1" />
+		<result property="debtphone2" column="debtphone2" />
+		<result property="debtphone3" column="debtphone3" />
+		<result property="debtidcard" column="debtidcard" />
+		<result property="debtiscontact" column="debtiscontact" />
+		<result property="debtispay" column="debtispay" />
+		<result property="modtime" column="modtime" />
+		<result property="moduser" column="moduser" />
+		<result property="updateTime" column="updateTime" />
+		<result property="deleteFlag" column="deleteFlag" />
+		<result property="proType" column="proType" />
+		<result property="endTime" column="endTime" />
+		<result property="salprsent" column="salprsent" />
+		<result property="bateprsent" column="bateprsent" />
+	</resultMap>
+	
+	
+	<select id="getList" resultMap="RightDebtInformationMapper"  parameterType="RightDebtInformation">
+	      select * from right_debt where deleteFlag is null
+	      <if test="rd.type!=null and rd.type !=''"> and type = #{rd.type}	</if>
+	      <if test="rd.moduser!=null and rd.moduser !=''"> and moduser = #{rd.moduser}	</if>
+	      <if test="rd.proType!=null and rd.proType !=''"> and proType >= #{rd.proType}	</if>
+	      limit #{pagestr},#{pageNum}
+	</select>
+	
+	<select id="getViewList" resultMap="RightDebtInformationMapper"  parameterType="RightDebtInformation">
+	      select * from right_debt where deleteFlag is null 
+	      <if test="rd.rightProvince!=null and rd.rightProvince !=''"> and rightProvince = #{rd.rightProvince}	</if>
+	      <if test="rd.rightcity!=null and rd.rightcity !=''"> and rightcity = #{rd.rightcity}	</if>
+	      <if test="rd.rightdist!=null and rd.rightdist !=''"> and rightdist = #{rd.rightdist}	</if>
+	      <if test="rd.latedays!=null and rd.latedays ==1"> and 180 > latedays	</if>
+	      <if test="rd.latedays!=null and rd.latedays ==2"> and 360 > latedays	</if>
+	      <if test="rd.latedays!=null and rd.latedays ==3"> and 720 > latedays	</if>
+	      <if test="rd.latedays!=null and rd.latedays ==4"> and latedays >= 720	</if>
+	      <if test="rd.rightamount!=null and rd.rightamount ==1"> and 10 > rightamount	</if>
+	      <if test="rd.rightamount!=null and rd.rightamount ==2"> and  rightamount>= 10 and 100 >= rightamount</if>
+	      <if test="rd.rightamount!=null and rd.rightamount ==3"> and  rightamount> 100 </if>
+	      <if test="rd.proType!=null and rd.proType !=''"> and proType >= #{rd.proType}	</if>
+	      limit #{pagestr},#{pageNum}
+	</select>
+	
+	<select id="getVerList" resultMap="RightDebtInformationMapper"  parameterType="RightDebtInformation">
+	      select * from right_debt where deleteFlag is null
+	      <if test="rd.type!=null and rd.type !=''"> and type = #{rd.type}	</if>
+	      <if test="rd.moduser!=null and rd.moduser !=''"> and moduser = #{rd.moduser}	</if>
+	      <if test="rd.proType!=null and rd.proType !=''"> and proType = #{rd.proType}	</if>
+	      limit #{pagestr},#{pageNum}
+	</select>
+
+	<insert id="addEntity" parameterType="RightDebtInformation">
+		INSERT INTO right_debt(type,rightname,rightaddress,rightphone,rightidcard,rightcontact,rightcontactphone,rightamount,disposalmethod,latedays,
+		guaranteemethod,collectionmeasures,voucher,rightdesc,debtname,debtaddress,debtphone1,debtphone2,debtphone3,debtidcard,debtiscontact,
+		debtispay,modtime,moduser,updateTime,deleteFlag,bianhaoId,rightProvince,rightcity,rightdist,isSusong,isPanjue,proType,endTime,salprsent,bateprsent)
+		VALUES (
+		#{type},#{rightname},#{rightaddress},#{rightphone},#{rightidcard},#{rightcontact},#{rightcontactphone},#{rightamount},#{disposalmethod},#{latedays},
+		#{guaranteemethod},#{collectionmeasures},#{voucher},#{rightdesc},#{debtname},#{debtaddress},#{debtphone1},#{debtphone2},#{debtphone3},
+		#{debtidcard},#{debtiscontact},#{debtispay},#{modtime},#{moduser},#{updateTime},#{deleteFlag},
+		#{bianhaoId},#{rightProvince},#{rightcity},#{rightdist},#{isSusong},#{isPanjue},#{proType},#{endTime},#{salprsent},#{bateprsent})
+	</insert>
+	
+	<update id="updateEntity"  parameterType="RightDebtInformation">  
+        UPDATE right_debt SET 
+		type=#{type},rightname=#{rightname},rightaddress=#{rightaddress},rightphone=#{rightphone},
+        rightidcard=#{rightidcard},rightcontact=#{rightcontact},rightcontactphone=#{rightcontactphone},
+        rightamount=#{rightamount},disposalmethod=#{disposalmethod},latedays=#{latedays},
+        guaranteemethod=#{guaranteemethod},collectionmeasures=#{collectionmeasures},voucher=#{voucher},
+        rightdesc=#{rightdesc},debtname=#{debtname},debtaddress=#{debtaddress},debtphone1=#{debtphone1},
+        debtphone2=#{debtphone2},debtphone3=#{debtphone3},debtidcard=#{debtidcard},debtiscontact=#{debtiscontact},
+        debtispay=#{debtispay},modtime=#{modtime},moduser=#{moduser},updateTime=#{updateTime},
+        deleteFlag=#{deleteFlag},bianhaoId=#{bianhaoId},rightProvince=#{rightProvince},rightcity=#{rightcity},
+        rightdist=#{rightdist},isSusong=#{isSusong},isPanjue=#{isPanjue},proType=#{proType},endTime=#{endTime},
+        salprsent=#{salprsent},bateprsent=#{bateprsent}
+        where id = #{id}
+    </update> 
+    
+    <update id="deleteEntity"  parameterType="RightDebtInformation">  
+        UPDATE right_debt SET 
+        updateTime=#{updateTime},
+        deleteFlag=#{deleteFlag}
+        where id = #{id} 
+    </update> 
+    
+    <select id="getEntityById" resultMap="RightDebtInformationMapper"  parameterType="int">
+	      select * from right_debt where deleteFlag is null
+	      <if test="id!=0"> and id = #{id}	</if>
+	</select>
+	
+	<update id="verRightDebt"  parameterType="RightDebtInformation">  
+        UPDATE right_debt SET 
+       	proType=#{proType}
+       	<if test="infoText!='' and infoText!=null"> ,infoText=#{infoText}</if>
+        where id = #{id}
+    </update>
+    <update id="checkUserEntity"  parameterType="RightDebtInformation">  
+        UPDATE right_debt SET 
+       	proType=#{proType}
+        where id = #{id}
+    </update>
+    
+     
+</mapper>

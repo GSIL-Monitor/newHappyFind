@@ -1,0 +1,135 @@
+@charset "utf-8";
+/*css reset*/
+html {
+  -webkit-font-smoothing: antialiased;
+}
+body,
+nav,
+dl,
+dt,
+dd,
+p,
+h1,
+h2,
+h3,
+h4,
+ul,
+ol,
+li,
+input,
+button,
+textarea,
+footer {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font: 16px/1.5 'Helvetica Neue', 'Microsoft YaHei', 'Heiti SC', simhei, 'Lucida Sans Unicode', 'Myriad Pro', 'Hiragino Sans GB', Verdana;
+  color: #333;
+  background: #fff;
+  -webkit-text-size-adjust: none;
+  min-width: 320px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+}
+label {
+  font-weight: normal;
+}
+form {
+  display: inline;
+}
+ul,
+ol {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #1a1a1a;
+}
+a:hover,
+a:active,
+a:focus {
+  color: #1c5aa2;
+  text-decoration: none;
+}
+a:active {
+  color: #aaa;
+}
+img {
+  vertical-align: middle;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+}
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  vertical-align: middle;
+  outline: none;
+}
+textarea {
+  resize: none;
+}
+input {
+  background: none;
+}
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button;
+  -moz-appearance: button;
+}
+input:focus:-moz-placeholder,
+input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+header,
+footer,
+article,
+section,
+nav,
+menu,
+hgroup {
+  display: block;
+  clear: all;
+}
+label {
+  font-weight: normal;
+}
+.btn-primary {
+  background-color: #00b57d;
+  color: #fff;
+  border: none;
+}
+.btn-primary:hover {
+  background-color: #00af79;
+  border: none;
+}
+.btn-default {
+  background-color: #f4f4f4;
+  color: #00b57d;
+  border: 1px solid #e4e4e4;
+}
+.btn-default:hover {
+  background-color: #f4f4f4;
+  border: 1px solid #e4e4e4;
+  color: #00b57d;
+}

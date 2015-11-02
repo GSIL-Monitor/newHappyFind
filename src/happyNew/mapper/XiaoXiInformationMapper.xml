@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="happyNew.mapper.XiaoXiInformationMapper">
+	
+	<resultMap id="XiaoXiInformationMapper" type="happyNew.entity.XiaoXiInformation">
+		<result property="id" column="id" />
+		<result property="xiaoxiname" column="xiaoxiname" />
+		<result property="xiaoxitype" column="xiaoxitype" />
+		<result property="xiaoxidesc" column="xiaoxidesc" />
+		<result property="modtime" column="modtime" />
+		<result property="userid" column="userid" />
+		<result property="deleteFlag" column="deleteFlag" />
+		<result property="xiaoxiFlag" column="xiaoxiFlag" />
+	</resultMap>
+	
+	<select id="getList" resultMap="XiaoXiInformationMapper"  parameterType="XiaoXiInformation">
+	      select id,xiaoxiname,xiaoxitype,xiaoxidesc,modtime,userid,xiaoxiFlag
+	      from xiaoxi
+	      where (deleteFlag is null or deleteFlag = 0)
+	      <if test="userid !=null and userid !=''"> and userid = #{userid}	</if>
+	</select>
+	
+	<select id="getAll"  resultType="int" parameterType="int">
+	      select count(1) from xiaoxi where (deleteFlag is null or deleteFlag = 0)
+	      <if test="userid !=null and userid !=''"> and userid = #{userid}	</if>
+	      <if test="xiaoxitype !=null and xiaoxitype !=''"> and xiaoxitype = #{xiaoxitype}	</if>
+	</select>
+	
+	<insert id="addEntity"  parameterType="XiaoXiInformation">
+		INSERT INTO xiaoxi(xiaoxiname,xiaoxitype,xiaoxidesc,modtime,userid,deleteFlag,xiaoxiFlag)
+		VALUES (#{xiaoxiname},#{xiaoxitype},#{xiaoxidesc},#{modtime},#{userid},#{deleteFlag},#{xiaoxiFlag})
+	</insert>
+	
+    <update id="deleteEntity"  parameterType="XiaoXiInformation">  
+        UPDATE xiaoxi SET 
+        deleteFlag=#{deleteFlag}
+        where id = #{id} 
+    </update> 
+    
+    <update id="updateEntity"  parameterType="XiaoXiInformation">  
+        UPDATE xiaoxi SET 
+        xiaoxiFlag=1
+        where id = #{id} 
+    </update> 
+    
+    <select id="getEntityByUserId" resultMap="XiaoXiInformationMapper"  parameterType="int">
+	      select * from xiaoxi where deleteFlag is null 
+	      <if test="userid!=0"> and userid = #{userid}	</if>
+	</select>
+    
+    
+     
+</mapper>

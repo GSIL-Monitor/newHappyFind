@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="happyNew.mapper.CompetitiveInformationMapper">
+	
+	<resultMap id="CompetitiveInformationMapper" type="happyNew.entity.CompetitiveInformation">
+		<result property="id" column="id" />
+		<result property="proId" column="proId" />
+		<result property="proPrsent" column="proPrsent" />
+		<result property="modtime" column="modtime" />
+		<result property="moduser" column="moduser" />
+		<result property="updateTime" column="updateTime" />
+		<result property="deleteFlag" column="deleteFlag" />
+		<result property="proFlag" column="proFlag" />
+		<result property="proBianhao" column="proBianhao" />
+		<result property="type" column="type" />
+		<result property="prorightamount" column="prorightamount" />
+		<result property="moduserType" column="moduserType" />
+		
+		<result property="cruPhone" column="cruPhone" />
+		<result property="cruAdrress" column="cruAdrress" />
+		<result property="crutel" column="crutel" />
+		<result property="cruUser" column="cruUser" />
+		<result property="cruUserShip" column="cruUserShip" />
+		<result property="crufileAdress" column="crufileAdress" />
+		<result property="infoText" column="infoText" />
+		<result property="submitTime" column="submitTime" />
+		
+	</resultMap>
+	
+	<select id="getList" resultMap="CompetitiveInformationMapper"  parameterType="CompetitiveInformation">
+	      select c.*,r.bianhaoId as proBianhao,r.type as type ,r.rightamount as prorightamount ,u.userFlag as moduserType
+	      from competitive c join right_debt r 
+	      on c.proId = r.id
+	      join logon_user u
+	      on c.moduser = u.userName
+	      where (c.deleteFlag is null or c.deleteFlag = 0)
+	      <if test="proId !=null and proId !=''"> and c.proId = #{proId}	</if>
+	      <if test="moduser !=null and moduser !=''"> and c.moduser = #{moduser}	</if>
+	      <if test="proFlag !=null and proFlag !=''"> and c.proFlag = #{proFlag}	</if>
+	</select>
+	
+	
+	
+	<select id="getAll"  resultType="int" parameterType="int">
+	      select count(1) from competitive where (deleteFlag is null or deleteFlag = 0)
+	      <if test="proId !=null and proId !=''"> and proId = #{proId}	</if>
+	</select>
+	
+	<insert id="addEntity"  parameterType="CompetitiveInformation">
+		INSERT INTO competitive(proId,proPrsent,modtime,moduser,updateTime,deleteFlag,proFlag)
+		VALUES (#{proId},#{proPrsent},#{modtime},#{moduser},#{updateTime},#{deleteFlag},#{proFlag})
+	</insert>
+	
+	<insert id="updateEntity"  parameterType="CompetitiveInformation">
+		UPDATE competitive SET 
+		proPrsent=#{proPrsent},
+		updateTime=#{updateTime}
+		where proId=#{proId}
+		and moduser=#{moduser}
+	</insert>
+	
+    <update id="deleteEntity"  parameterType="CompetitiveInformation">  
+        UPDATE competitive SET 
+        updateTime=#{updateTime},
+        deleteFlag=#{deleteFlag}
+        where id = #{id} 
+    </update> 
+    
+	 <update id="verCompetitive"  parameterType="CompetitiveInformation">  
+        UPDATE competitive SET 
+       	proFlag=#{proFlag}
+       	<if test="infoText !=null and infoText !=''"> , infoText = #{infoText}	</if>
+        where id = #{id}
+    </update>
+    
+     <update id="checkNoCompetitive"  parameterType="CompetitiveInformation">  
+        UPDATE competitive SET 
+       	proFlag=#{proFlag}
+        where proId=#{proId}
+        and id!=#{id}
+    </update>
+    
+    
+    <update id="addComInfo"  parameterType="CompetitiveInformation">  
+        UPDATE competitive SET 
+       	cruPhone=#{cruPhone},
+       	cruAdrress=#{cruAdrress},
+       	crutel=#{crutel},
+       	cruUser=#{cruUser},
+       	crufileAdress=#{crufileAdress},
+       	cruUserShip = #{cruUserShip},
+       	proFlag = #{proFlag},
+       	submitTime = #{submitTime}
+        where id=#{id}
+    </update> 
+    
+   <select id="getEntityById"  resultMap="CompetitiveInformationMapper" parameterType="int">
+	      select * from competitive where deleteFlag is null
+	      <if test="id!=0"> and id = #{id}	</if>
+	</select>
+    
+     
+</mapper>

@@ -1,0 +1,73 @@
+body{font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif,"ËÎÌו";color:#666;background: #f7f6f6;}
+*{margin:0;padding:0;}
+ul{ list-style-type:none;}
+a{ text-decoration:none;}
+img{border:0px;vertical-align:middle;}
+.fl{float: left;}
+.fr{float: right;}
+
+/*zhaobiao*/
+.zhao1{width: 100%;min-width:990px;background: #fff; border:2px solid #d2d2d2;border-left: none;border-right: none;margin-left:auto;margin-right:auto;}
+.zhao1con{width:990px; margin:0px auto;}
+.zhaoul{height:52px;line-height: 52px;border-bottom: 1px solid #fa5c20;}
+.zhaoul li{float: left;width: 160px;height:53px;text-align: center;cursor: pointer;}
+.zhaoul li:hover{color:#339ff1;}
+.zhaoul li.lisper{color:#0081c6;font-size: 18px;font-weight: bold;}
+.zhao_tab1{display: none;}
+.zhao_tab2{display: none;}
+.show{display: block;}
+.zhao_tab1 td{font-size: 16px;padding:5px 0px;line-height:35px;}
+.zhao_tab1p{color:#1776cd;font-size: 18px;padding:20px 0px 10px 45px;}
+.zhao_tab1tdl{width:135px;text-align: right;}
+td .tabradcheck{margin-left: 25px;margin-right: 5px;margin-bottom:6px;}
+.pubsel{font-size:14px;height:26px; line-height:26px;margin-left:25px;padding-left: 10px;}
+.zhao_tab1p2{padding:20px 0px;}
+.zhao_tab1p2 a{width:113px; height: 35px;line-height: 35px;text-align: center;color: #fff;font-size: 18px;display: inline-block;}
+.zhao_tab1p2 a:hover{opacity: 0.8;filter:alpha(opacity=80);}
+.query{background: #339ff1;margin-left: 144px;}
+.zhaoa2{background: #65c7ff;margin-left: 30px;}
+/*zhao2*/
+.zhao2{width: 990px;margin:10px 0px;margin-left:auto;margin-right:auto}
+.zhao2 h2{width:990px; margin:0px auto;font-size: 22px;color: #333;font-weight: normal;height:45px;line-height: 45px;}
+.line{width:5px;height:45px;display: inline-block;background: #fa5c20;float: left;margin-right: 10px;}
+/*zhao3*/
+.zhao3con{width:990px; margin:30px auto;}
+.zhaolist{border:1px solid #d2d2d2;height:145px;background: #fff;margin-bottom: 20px;position: relative;border-radius:10px}
+.zhao_ren{position: absolute;top:10px;left:860px;}
+.zhaolist:hover{-moz-box-shadow: 10px 10px 5px #eee;box-shadow:2px 2px 5px #aaa;}
+.zhaolist:hover .pronum{opacity: 0.8;filter:alpha(opacity=80);}
+.zhaolistl{width:250px;position: absolute;top:20px;left:20px;}
+.zhaolistl h3{font-size: 18px;font-weight: normal;color: #ed6d00;white-space: nowrap;}
+.listper{top:18px;left:300px;font-size: 18px;font-weight: bold;color:#fa5c20}
+.quan{line-height: 90px;text-align: center;font-size: 16px;}
+.pronum{width:90px;height:90px;line-height:90px;display: inline-block;border-radius: 50%;background-color: #258ede;color:#fff;font-size: 20px;text-align: center;margin:15px auto;margin-right: 15px;}
+.tui{float: left;margin-top: 3px;}
+.zhaolistm{width:420px;overflow: hidden;position: absolute;top:20px;left:310px;}
+.listmvip{height: 39px;}
+.listm2{font-size: 16px;padding:10px 0px;}
+.listm2 .bold{font-size: 18px;color: #000;}
+.zhaolistm table{width:90%;margin:0px auto;margin-top: 10px; text-align: center;font-size: 14px;}
+.leftboer1{border-left: 1px dashed #999999;height:48px;line-height: 30px;}
+.zhaolistm .listtablespe{margin-top: 20px;}
+.listtablespe td{height:40px;line-height: 40px;padding-left: 10px;text-align: left;}
+.tablenum{color:#fa5c20;font-size: 18px;}
+.tablenum1{color:#fa5c20;font-size: 18px;margin-left: 30px;}
+.zhaolistr{width:185px;position: absolute;top:20px;right:20px;font-size: 14px;}
+.zhaolistr h3{font-size: 18px;font-weight: normal;color: #000;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+.zhaolistr h3 span{font-size: 22px;color: #ed6d00;}
+.zhaolistr h3 .zhao_over{color: #339ff1;}
+.zhaolistrp{text-align: center;padding:30px 0px;}
+.listbtn{width:113px; height: 35px;line-height: 35px;text-align: center;color: #fff;font-size: 18px;display: inline-block;background: #339ff1;}
+.listbtn:hover{opacity: 0.8;filter:alpha(opacity=80);}
+.list_shen{margin-bottom: 10px;text-align: center;}
+.list_shen span{font-size: 16px;color: #ed6d00;margin:0px 9px;}
+.list_shen .list_shens{margin-right: 16px;}
+
+.jine{font-size: 38px;color: #FB0732;margin-left:30px;}
+
+.page{height:40px;line-height:40px;font-size:14px;text-align:center;margin-top:20px;color:#999;}
+.page a{background:#fff;color:#999;padding:1px 8px;margin-right:10px;zoom:1;border: 1px solid #dedede;-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;}   
+.page a:hover,.page a.dq{background:#0aa9e1;border:1px solid #0aa9e1;color:#fff;}
+.page a.pageNoClick{color:#dfdfdf;}
+.page a.pageNoClick:hover{background:#fff;border: 1px solid #dedede;color:#dfdfdf;}
+

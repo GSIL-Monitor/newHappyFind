@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="happyNew.mapper.QualityConfirmInformationMapper">
+	
+	<resultMap id="QualityConfirmInformationMapper" type="happyNew.entity.QualityConfirmInformation">
+		<result property="id" column="id" />
+		<result property="type" column="type" />
+		<result property="userid" column="userid" />
+		<result property="username" column="username" />
+		<result property="idcard" column="idcard" />
+		<result property="profession" column="profession" />
+		<result property="province" column="province" />
+		<result property="prefecturecity" column="prefecturecity" />
+		<result property="area" column="area" />
+		<result property="uploadidcard" column="uploadidcard" />
+		<result property="email" column="email" />
+		<result property="companyname" column="companyname" />
+		<result property="companyidcard" column="companyidcard" />
+		<result property="companyprovince" column="companyprovince" />
+		<result property="companyprefecturecity" column="companyprefecturecity" />
+		<result property="companyarea" column="companyarea" />
+		<result property="uploadcompanyareaidcard" column="uploadcompanyareaidcard" />
+		<result property="legalname" column="legalname" />
+		<result property="companysize" column="companysize" />
+		<result property="companyemail" column="companyemail" />
+		<result property="modtime" column="modtime" />
+		<result property="moduser" column="moduser" />
+		<result property="updateTime" column="updateTime" />
+		<result property="deleteFlag" column="deleteFlag" />
+		<result property="infoFlag" column="infoFlag" />
+		<result property="infoText" column="infoText" />
+	</resultMap>
+	
+	
+	<select id="getList" resultMap="QualityConfirmInformationMapper"  parameterType="QualityConfirmInformation">
+	      select * from quality_confirm where deleteFlag is null 
+	      <if test="type!=null and type !=''"> and type = #{type}	</if>
+	      <if test="infoFlag!=infoFlag and infoFlag !=''"> and infoFlag = #{infoFlag}	</if>
+	</select>
+
+	<insert id="addEntity" parameterType="QualityConfirmInformation">
+		INSERT INTO quality_confirm(type,userid,username,idcard,profession,province,prefecturecity,area,uploadidcard,email,
+		companyname,companyidcard,companyprovince,companyprefecturecity,companyarea,uploadcompanyareaidcard,legalname,companysize,
+		modtime,moduser,updateTime,deleteFlag,infoFlag,companyemail)
+		VALUES (
+		#{type},#{userid},#{username},#{idcard},#{profession},#{province},#{prefecturecity},#{area},#{uploadidcard},#{email},
+		#{companyname},#{companyidcard},#{companyprovince},#{companyprefecturecity},#{companyarea},#{uploadcompanyareaidcard},#{legalname},#{companysize},
+		#{modtime},#{moduser},#{updateTime},#{deleteFlag},#{infoFlag},#{companyemail})
+	</insert>
+	
+	<update id="updateEntity"  parameterType="QualityConfirmInformation">  
+     	UPDATE quality_confirm SET 
+		type=#{type},userid=#{userid},username=#{username},idcard=#{idcard},
+        profession=#{profession},province=#{province},prefecturecity=#{prefecturecity},
+        area=#{area},uploadidcard=#{uploadidcard},email=#{email},
+        companyname=#{companyname},companyidcard=#{companyidcard},companyprovince=#{companyprovince},
+        companyprefecturecity=#{companyprefecturecity},companyarea=#{companyarea},uploadcompanyareaidcard=#{uploadcompanyareaidcard},legalname=#{legalname},
+        companysize=#{companysize},modtime=#{modtime},moduser=#{moduser},updateTime=#{updateTime},deleteFlag=#{deleteFlag},infoFlag=#{infoFlag}
+        ,companyemail=#{companyemail}
+        where id = #{id}
+    </update> 
+    
+    <update id="deleteEntity"  parameterType="QualityConfirmInformation">  
+        UPDATE quality_confirm SET 
+        updateTime=#{updateTime},
+        deleteFlag=#{deleteFlag}
+        where id = #{id} 
+    </update> 
+    
+    <select id="getEntityById" resultMap="QualityConfirmInformationMapper"  parameterType="int">
+	      select * from quality_confirm where deleteFlag is null 
+	      <if test="id!=0"> and id = #{id}	</if>
+	</select>
+	
+	    <select id="getEntityByUserId" resultMap="QualityConfirmInformationMapper"  parameterType="int">
+	      select * from quality_confirm where deleteFlag is null 
+	      <if test="userId!=0"> and userid = #{userId}	</if>
+	</select>
+	
+    <update id="verQualityConfirm"  parameterType="QualityConfirmInformation">  
+        UPDATE quality_confirm SET 
+       	infoFlag=#{infoFlag},
+       	infoText=#{infoText}
+        where id = #{id}
+    </update>
+     
+</mapper>

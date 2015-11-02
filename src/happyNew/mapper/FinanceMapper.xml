@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="happyNew.mapper.FinanceMapper">
+	<resultMap id="FinanceMap" type="happyNew.entity.Finance">
+		<result property="id" column="id" />
+		<result property="userId" column="userId" />
+		<result property="userName" column="userName" />
+		<result property="inFinance" column="inFinance" />
+		<result property="outFinance" column="outFinance" />
+		<result property="stopFinance" column="stopFinance" />
+		<result property="totleFinance" column="totleFinance" />
+		<result property="updateTime" column="updateTime" />
+		<result property="updateUser" column="updateUser" />
+		<result property="financeInfo" column="financeInfo" />
+		<result property="proFlag" column="proFlag" />
+		
+	</resultMap>
+	
+	
+	<select id="getList" resultMap="FinanceMap"  parameterType="Finance">
+	      select * from Finance where 1=1
+	</select>
+	
+	<select id="getEntityByUserName"  resultMap="FinanceMap" parameterType="String">
+	      select * from Finance where 1=1 and proFlag = 1
+	      <if test="userName!=null and userName !=''"> and userName = #{userName}</if>
+	</select>
+
+	<insert id="addEntity" parameterType="Finance">
+		INSERT INTO Finance(userId,userName,inFinance,outFinance,stopFinance,updateTime,updateUser ,financeInfo,totleFinance)
+		VALUES (
+		#{userId},#{userName},#{inFinance},#{outFinance},#{stopFinance},#{updateTime},#{updateUser},#{financeInfo},#{totleFinance}
+		)
+	</insert>
+	
+    
+    <select id="getEntityByUserId" resultMap="FinanceMap"  parameterType="int">
+	      select * from Finance where 1=1
+	       <if test="userId!=null and userId !=''"> and userId = #{userId}	</if>
+	</select>
+	
+	<update id="updateTotleFinance"  parameterType="String"> 
+		UPDATE finance a join (select userName,proFlag,sum((case when inFinance is null then 0 else inFinance END)-(case when outFinance is null then 0 else outFinance END)) as totleFinance
+			from finance 
+			where userName = #{userName}
+			and proFlag='1')b
+			on a.userName = b.userName
+			and a.proFlag = b.proFlag
+			set a.totleFinance = b.totleFinance 
+	</update> 
+	
+     
+</mapper>

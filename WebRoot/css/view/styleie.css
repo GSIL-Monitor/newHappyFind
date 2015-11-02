@@ -1,0 +1,12 @@
+@charset "utf-8";
+.sel-c select {
+    padding-right: 0px;
+}
+.sel-c select::-ms-expand {display: none;}
+.sel-c span.caret {
+    display: none;
+}
+.caret {
+    border-bottom: 0px;
+    border-top: 4px solid;
+}
